@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text">
+    <script>
+        // function jieliu(callback, time) {
+        //     var timer;
+        //     return function () {
+        //         if (timer) {
+        //             return
+        //         }
+        //         timer = setTimeout(function () {
+        //             callback()
+        //             timer = null
+        //         }, time)
+        //     }
+        // }
+        // var JL = jieliu(function (test) {
+        //     console.log("123")
+        // }, 1000)
+        // var inp = document.querySelector('input')
+        // inp.oninput = function () {
+        //     JL()
+        // }
+
+        function jieliu(callback, time, deep) {
+            if (deep == undefined) {
+                deep = true
+            }
+            var t, timer;
+            return function () {
+                if (deep) {
+                    if (!t || Date.now() - t > time) {
+                        callback()
+                        t = Date.now()
+                    }
+                } else {
+                    if (timer) {
+                        return
+                    }
+                    timer = setTimeout(function () {
+                        callback()
+                        timer = null
+                    }, time)
+                }
+            }
+        }
+        var JL = jieliu(function () {
+            console.log("123")
+        }, 1000,false)
+        var inp = document.querySelector('input')
+        inp.oninput = function () {
+            JL()
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .left {
+            float: left;
+            margin-left: 10px;
+        }
+
+        #divword {
+            margin-top: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="divimg" class="left">
+        <img src="./images/empty.png" alt="">
+        <img src="./images/empty.png" alt="">
+        <img src="./images/empty.png" alt="">
+        <img src="./images/empty.png" alt="">
+        <img src="./images/empty.png" alt="">
+    </div>
+    <div id="divword" class="left">
+
+    </div>
+    <script>
+        var divimg = document.getElementById('divimg');
+        var divword = document.getElementById('divword');
+        var divtext = ['很差', '差', '一般', '满意', '非常满意']
+        var star = 0;
+        divimg.onmouseover = function (e) {
+            if (e.target.tagName == 'IMG') {
+                e.target.src = "./images/shining.png"
+                var prevele = e.target.previousElementSibling
+                while (prevele) {
+                    prevele.src = "./images/shining.png"
+                    prevele = prevele.previousElementSibling
+                }
+                var index = Array.from(divimg.children).indexOf(e.target)
+                divword.innerText = divtext[index]
+                var nextele = e.target.nextElementSibling
+                while (nextele) {
+                    nextele.src = "./images/empty.png"
+                    nextele = nextele.nextElementSibling
+                }
+            }
+        }
+        divimg.onclick = function (e) {
+            var index = Array.from(divimg.children).indexOf(e.target);
+            star = index + 1
+        }
+        divimg.onmouseleave = function (e) {
+            console.log(star)
+            if (!star) {
+                for (var i = 0; i < divimg.children.length; i++) {
+                    divimg.children[i].src = "./images/empty.png"
+                }
+                divword.innerText = ''
+            } else {
+                var index = star - 1
+                divword.innerText = divtext[index]
+                for (var i = 0; i < divimg.children.length; i++) {
+                    if (i <= index) {
+                        divimg.children[i].src = "./images/shining.png"
+                    }else{
+                        divimg.children[i].src = "./images/empty.png"
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

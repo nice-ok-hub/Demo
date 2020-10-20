@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .wrapper {
+            width: 200px;
+            height: 200px;
+            background: blue;
+            position: fixed;
+            right: 0px;
+            bottom: -200px;
+        }
+
+        .close {
+            display: block;
+            width: 20px;
+            height: 20px;
+            float: right;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <a class="close">X</a>
+    </div>
+    <script>
+        var adv = {
+            dom: document.querySelector('.wrapper'),
+            totalTime: 1000,//总时间
+            totalDistance: 0,//总距离
+            totalSteps: 50,//总步数
+            dividingDistance: 0,//分距离
+            timeSharing: 0,//分时间
+            timer: null,
+            currentSteps: 0,//当前步数
+            dist:1000,
+            init: function () {
+                this.totalDistance = -parseFloat(getComputedStyle(this.dom).bottom)
+                this.dividingDistance = this.totalDistance / this.totalSteps
+                this.timeSharing = this.totalTime / this.totalSteps;
+                this.timer = setTimeout(this.move.bind(this, 1), this.timeSharing)
+            },
+            move: function (n) {
+                console.log(this)
+                var bottom = parseFloat(getComputedStyle(this.dom).bottom)
+                this.dom.style.bottom = bottom + this.dividingDistance * n + 'px'
+                this.currentSteps++;
+                if (this.currentSteps < this.totalSteps) {
+                    this.timer = setTimeout(this.move.bind(this, n), this.timeSharing)
+                } else {
+                    clearTimeout(this.timer)
+                    this.timer = null
+                    this.currentSteps = 0
+                    if(n == -1){
+                        setTimeout(this.move.bind(this, 1), this.dist)
+                    }
+                }
+            },
+            moveDown: function () {
+                if (this.timer == null) {
+                    this.move(-1)
+                }
+            }
+        }
+        var close = document.querySelector('.close')
+        close.onclick = function () {
+            adv.moveDown()
+        }
+        window.onload = function () {
+            adv.init()
+        }
+    </script>
+</body>
+
+</html>

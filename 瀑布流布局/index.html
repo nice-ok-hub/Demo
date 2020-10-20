@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .wrapper{
+            /* width:90%; */
+            margin:0 auto;
+            border:2px solid;
+            height:3000px;
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper"></div>
+    <script src="index.js"></script>
+    <script>
+        var srcs = [];
+        var sum = 1;
+        for (var i = 1; i <= 40; i++) {
+            srcs.push(`img/${sum}.jpg`)
+            sum += 1
+            if (sum > 4) {
+                sum = 1
+            }
+        }
+        myPlugin.createWaterFall({
+            minHap: 10,//水平方向的最小间隙
+            minVap: 10,//水平方向的最小间隙
+            imgSrcs: srcs,//图片的路径
+            imgWidth: 220,
+            container: document.querySelector('.wrapper')
+        })
+    </script>
+</body>
+
+</html>

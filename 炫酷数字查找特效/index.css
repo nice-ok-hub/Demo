@@ -1,0 +1,29 @@
+html,
+body {
+    height: 100%;
+
+}
+
+body {
+    background: #172f38;
+    margin: 0;
+    padding: 20px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.container span {
+    float: left;
+    min-width: 2em;
+    margin-right: 10px;
+}
+
+ .center {
+    position: fixed;
+    font-size: 8em;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 1s ease-in-out;
+    margin: auto;
+}

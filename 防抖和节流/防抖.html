@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text">
+    <script>
+        function FD(callback, time) {
+            var timer;
+            return function (val) {
+                clearTimeout(timer)
+               var args = arguments
+                timer = setTimeout(function () {
+                    callback.apply(null,args)
+                }, time)
+            }
+        }
+        var handou = FD(function (text) {
+            console.log(text)
+        }, 1000)
+        var input = document.querySelector('input')
+        input.oninput = function () {
+            handou(this.value)
+        }
+    </script>
+</body>
+
+</html>

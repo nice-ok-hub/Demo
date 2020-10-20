@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var  obj1 = {
+            name:'张智博',
+            age:18,
+            XB:'男',
+            love:'我和你'
+        }
+        var obj2 = {
+            name:'XXX',
+            age:'18',
+            XB:'女'
+        }
+        function HH(obj2,obj1){
+            var newObj = {}
+            for(var prop in obj2){
+                newObj[prop] = obj2[prop]
+            }
+            for(var prop in obj1){
+                if(!(prop in obj2)){
+                    newObj[prop] = obj1[prop]
+                }
+            }
+            return newObj
+        }
+        var newObj = HH(obj1,obj2);
+        console.log(newObj)
+    </script>
+</body>
+
+</html>
